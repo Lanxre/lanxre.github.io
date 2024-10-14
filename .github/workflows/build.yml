@@ -14,13 +14,13 @@ jobs:
           submodules: true
       
       - name: Setup Python
-        uses: actions/setup-python@v4.5.0
+        uses: actions/setup-python@v5
         with:
           python-version: 3.x
           check-latest: true
 
       - name: Install deps
-        run: pip install -r requirements.txt
+        run: pip install mkdocs-material mkdocs-awesome-pages-plugin mkdocs-table-reader-plugin
 
       - name: Build
         run: mkdocs build
