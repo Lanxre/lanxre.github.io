@@ -1,37 +1,29 @@
-name: Build and Deploy to Github Pages
-
+name: ci 
 on:
   push:
     branches:
-      - master
-
+      - master 
+      - main
+permissions:
+  contents: write
 jobs:
-  build_and_deploy:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      - uses: actions/setup-python@v5
         with:
-          fetch-depth: 0
-
-      - name: Setup Python
-        uses: actions/setup-python@v4.5.0
+          python-version: 3.x
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - uses: actions/cache@v4
         with:
-          python-version: 3.11
-          check-latest: true
-
-      - name: Install deps
-        run: pip install mkdocs-material mkdocs-awesome-pages-plugin mkdocs-table-reader-plugin
-
-      - name: Build
-        run: mkdocs build
-
-      - name: List files in site directory
-        run: ls -al ./site
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        if: ${{ github.ref == 'refs/heads/master' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install -r requirements.txt
+      - run: mkdocs gh-deploy --force
