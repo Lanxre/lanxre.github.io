@@ -1,0 +1,38 @@
+site_name: lanxre
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - attr_list
+  - tables
+  - abbr
+plugins:
+  - search
+  - awesome-pages
+  - table-reader
+  # - optimize
+theme:
+  name: material
+  font:
+    text: Merriweather
+  palette:
+    scheme: slate
+  features:
+    - content.code.copy
+    - navigation.tabs
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+extra_css:
+  - /blog/static/css/extra.css
