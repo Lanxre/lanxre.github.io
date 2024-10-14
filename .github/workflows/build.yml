@@ -9,40 +9,25 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout repository
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Ensure full commit history and all remotes are fetched
-
-      # Step 2: Add a step to check if the 'origin' remote is set
-      - name: Check Git remotes
-        run: git remote -v
-
-      # Step 3: Add remote 'origin' if it's missing (to avoid No such remote: 'origin')
-      - name: Add remote origin (if missing)
-        run: git remote add origin https://github.com/Lanxre/lanxre.github.io.git
-        continue-on-error: true  # Allow workflow to proceed even if this step errors
-
-      # Step 4: Set up Python
+          submodules: true
+      
       - name: Setup Python
         uses: actions/setup-python@v4.5.0
         with:
           python-version: 3.x
           check-latest: true
 
-      # Step 5: Install dependencies (using requirements.txt)
       - name: Install deps
         run: pip install -r requirements.txt
 
-      # Step 6: Build MkDocs
       - name: Build
         run: mkdocs build
 
-      # Step 7: Deploy to GitHub Pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
-          publish_branch: gh-pages  # Specify the branch to push to
