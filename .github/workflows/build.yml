@@ -25,14 +25,8 @@ jobs:
       - name: Build
         run: mkdocs build
 
-      - name: Debug Git
-        run: |
-          git status
-          git log -5
-          git remote -v
-
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
