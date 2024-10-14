@@ -28,6 +28,9 @@ jobs:
       - name: Build
         run: mkdocs build
 
+      - name: List files in site directory
+        run: ls -al ./site
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         if: ${{ github.ref == 'refs/heads/master' }}
