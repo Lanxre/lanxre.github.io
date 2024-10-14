@@ -72,7 +72,6 @@ hide: [navigation]
             <li>testing and deploying</li>
         </ul></td>
     </tr>
-
     <tr>
         <td width="20%">July 2022 - August 2022</td>
         <td>Intern at EPAM System</td>
@@ -84,7 +83,6 @@ hide: [navigation]
             up authentication and authorization systems to ensure data security.
         </td>
     </tr>
-
     <tr>
         <td width="20%">March 2023 - July 20232</td>
         <td>Intern at Modsen Software</td>
@@ -92,9 +90,7 @@ hide: [navigation]
             During my internship at Modsen, I gained skills in a variety of technologies, including
             Python and FastAPI and related tools. My responsibilities included implementing Docker
             for application containerization, which allowed us to greatly simplify the deployment and
-            scaling of web applications.
-
-        </td>
+            scaling of web applications.</td>
     </tr>
 
 
