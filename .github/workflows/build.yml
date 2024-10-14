@@ -8,11 +8,12 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true
-      
+          fetch-depth: 0
+
       - name: Setup Python
         uses: actions/setup-python@v4.5.0
         with:
@@ -24,6 +25,12 @@ jobs:
 
       - name: Build
         run: mkdocs build
+
+      - name: Debug Git
+        run: |
+          git status
+          git log -5
+          git remote -v
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
